@@ -4,6 +4,7 @@ export interface IAnalysisSection {
   performance?: string;
   improvements?: string;
   learning?: string;
+  [key: string]: string | undefined;
 }
 
 export interface ICodeMetrics {
