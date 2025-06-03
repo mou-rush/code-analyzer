@@ -40,11 +40,10 @@ export const ResultsPanel = ({
   });
 
   return (
-    <div className="group relative">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-
-      <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl min-h-[600px]">
-        <div className="flex items-center justify-between mb-8">
+    <div className="w-full max-w-none">
+      {/* Header */}
+      <div className="mb-6 p-6 bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-sm rounded-2xl border border-white/20">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
               <BarChart3 className="w-6 h-6 text-white" />
@@ -66,20 +65,18 @@ export const ResultsPanel = ({
             />
           )}
         </div>
+      </div>
 
+      {/* Content Area */}
+      <div className="w-full">
         {!isAnalyzing && !error && !results && <AnalysisCategories />}
-
         {isAnalyzing && <IsAnalysingDisplay />}
-
         {error && <IsAnalysingError error={error} />}
-
         {results && (
           <ResultsDashboard
             results={results}
             showToastMessage={showToastMessage}
-            toggleSection={toggleSection}
             filteredSections={filteredSections}
-            expandedSections={expandedSections}
           />
         )}
       </div>
