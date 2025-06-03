@@ -43,8 +43,9 @@ export const ResultsPanel = ({
     <div className="w-full max-w-none">
       {/* Header */}
       <div className="mb-6 p-6 bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-sm rounded-2xl border border-white/20">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          {/* Left section: Icon + Title */}
+          <div className="flex items-start sm:items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
@@ -56,13 +57,16 @@ export const ResultsPanel = ({
             </div>
           </div>
 
+          {/* Right section: Actions */}
           {results && (
-            <ResultsPanelActions
-              filterLevel={filterLevel}
-              setFilterLevel={setFilterLevel}
-              onExport={onExport}
-              onShare={onShare}
-            />
+            <div className="mt-4 sm:mt-0">
+              <ResultsPanelActions
+                filterLevel={filterLevel}
+                setFilterLevel={setFilterLevel}
+                onExport={onExport}
+                onShare={onShare}
+              />
+            </div>
           )}
         </div>
       </div>
