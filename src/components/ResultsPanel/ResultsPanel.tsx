@@ -25,14 +25,7 @@ export const ResultsPanel = ({
   onShare,
   showToastMessage,
 }: ResultsPanelProps) => {
-  const [expandedSections, setExpandedSections] = useState<{
-    [key: string]: boolean;
-  }>({});
   const [filterLevel, setFilterLevel] = useState("all");
-
-  const toggleSection = (key: string) => {
-    setExpandedSections((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
 
   const filteredSections = SECTION_CONFIG.filter((section) => {
     if (filterLevel === "all") return true;
