@@ -13,6 +13,14 @@ export const callGeminiAPI = async (
   language: string,
   code: string
 ): Promise<string> => {
+  const apiKey = localStorage.getItem("gemini_api_key");
+
+  // import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("API key not configured. Please set your Gemini API key.");
+  }
+
   const prompt = `You are an expert code reviewer and programming mentor. Analyze the following ${language} code and provide a comprehensive review in the following categories:
   
   1. **BUGS & ISSUES**: Identify any bugs, logical errors, or potential runtime issues
@@ -31,9 +39,7 @@ export const callGeminiAPI = async (
   Please format your response clearly with each category separated.`;
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${
-      import.meta.env.VITE_GOOGLE_GEMINI_API_KEY
-    }`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

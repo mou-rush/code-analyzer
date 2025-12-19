@@ -21,9 +21,11 @@ interface InputFormProps {
   onClear: () => void;
   onLoadExample: () => void;
   showToastMessage: (message: string) => void;
+  hasApiKey: boolean;
 }
 
 export const InputForm = ({
+  hasApiKey,
   language,
   setLanguage,
   code,
@@ -170,7 +172,8 @@ function fibonacci(n) {
             {/* Analyze Button - Fully Responsive */}
             <button
               onClick={onAnalyze}
-              disabled={isAnalyzing || !code.trim()}
+              disabled={isAnalyzing || !code.trim() || !hasApiKey}
+              title={!hasApiKey ? "Please set your API key first" : ""}
               className="group relative w-full py-4 sm:py-5 lg:py-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-lg lg:rounded-xl hover:shadow-2xl hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all duration-300 overflow-hidden cursor-pointer"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>

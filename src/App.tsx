@@ -8,6 +8,7 @@ import { Header } from "./components/Header/Header";
 import { ResultsPanel } from "./components/ResultsPanel/ResultsPanel";
 import { CheckCircle } from "lucide-react";
 import { examples } from "./constants/index";
+import { ApiKeyManager } from "./components/APIKeyManager/APIKeyManager";
 
 const CodeSenseApp = () => {
   const [language, setLanguage] = useState("javascript");
@@ -17,6 +18,7 @@ const CodeSenseApp = () => {
   const [error, setError] = useState<string | null>(null);
   const [overallScore, setOverallScore] = useState(0);
   const [showToast, setShowToast] = useState("");
+  const [hasApiKey, setHasApiKey] = useState(false);
 
   const handleAnalyze = async () => {
     if (!code.trim()) {
@@ -126,9 +128,14 @@ const CodeSenseApp = () => {
     setCode(examples[language as keyof typeof examples] || examples.javascript);
   };
 
+  const handleApiKeyUpdate = (key: string | null) => {
+    setHasApiKey(!!key);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
       <FloatingParticles />
+      <ApiKeyManager onKeyUpdate={handleApiKeyUpdate} />
       {/* Toast notification */}
       {showToast && (
         <div className="toast">
@@ -156,6 +163,7 @@ const CodeSenseApp = () => {
             onClear={handleClear}
             onLoadExample={handleLoadExample}
             showToastMessage={showToastMessage}
+            hasApiKey={hasApiKey}
           />
 
           <ResultsPanel
