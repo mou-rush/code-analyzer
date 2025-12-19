@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Key, Eye, EyeOff, X, Check } from "lucide-react";
 
-export const ApiKeyManager = ({ onKeyUpdate }) => {
+interface ApiKeyManagerProps {
+  onKeyUpdate?: (key: string | null) => void;
+}
+
+export const ApiKeyManager = ({ onKeyUpdate }: ApiKeyManagerProps) => {
   const [apiKey, setApiKey] = useState("");
   const [showKey, setShowKey] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
